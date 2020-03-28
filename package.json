@@ -1,0 +1,8 @@
+{
+  "name": "airplaneseats",
+  "version": "1.0.0",
+  "description": "Algorithim excerise for seating families of 4 in an airplane",
+  "main": "index.js",
+  "author": "Andres Zapata <me@azapata.io>",
+  "license": "MIT"
+}
