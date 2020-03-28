@@ -4,5 +4,20 @@
   "description": "Algorithim excerise for seating families of 4 in an airplane",
   "main": "index.js",
   "author": "Andres Zapata <me@azapata.io>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test:watch": "yarn test --watch",
+    "lint": "eslint **/*.js",
+    "lint:fix": "eslint --fix **/*.js"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "jest": "^25.2.3",
+    "eslint": "^6.8.0",
+    "prettier": "^2.0.2"
+  },
+  "dependencies": {
+
+  }
 }
