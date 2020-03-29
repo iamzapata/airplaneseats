@@ -11,7 +11,7 @@ module.exports = {
 
   moduleDirectories: ['node_modules', '<rootDir>/src'],
 
-  modulePaths: ['node_modules', '<rootDir>/src'],
+  modulePaths: ["<rootDir>"],
 
   setupFilesAfterEnv: ['./src/__testing__/setupEnvironment.js'],  
 
