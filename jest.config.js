@@ -7,15 +7,15 @@ module.exports = {
 
   testPathIgnorePatterns: ['config/webpack', '<rootDir>/.*/__mocks__'],
 
-  collectCoverageFrom: ['src/**/*.{js,jsx}'],
+  collectCoverageFrom: ['<rootDir>/**/*.{js,jsx}'],
 
-  moduleDirectories: ['node_modules', '<rootDir>/src'],
+  moduleDirectories: ['node_modules', '<rootDir>'],
 
   modulePaths: ["<rootDir>"],
 
-  setupFilesAfterEnv: ['./src/__testing__/setupEnvironment.js'],  
+  setupFilesAfterEnv: ['<rootDir>/__testing__/setupEnvironment.js'],  
 
-  modulePathIgnorePatterns: ['<rootDir>/src/cypress'],
+  modulePathIgnorePatterns: ['<rootDir>/cypress'],
 
   testMatch: ['**/__tests__/**/(*.)+(spec|test).[jt]s?(x)'],
 

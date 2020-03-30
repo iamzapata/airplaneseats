@@ -1,4 +1,4 @@
-import numberOfFamiliesOnPlane from 'src/modules/numberOfFamiliesOnPlane'
+import numberOfFamiliesOnPlane from 'modules/numberOfFamiliesOnPlane'
 
 describe('numberOfFamiliesOnPlane', () => {
   it('errors if is not defined', () => {

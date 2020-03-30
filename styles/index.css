@@ -1,0 +1,9 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body > div {
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+}
