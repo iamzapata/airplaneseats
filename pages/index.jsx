@@ -1,15 +1,6 @@
 import React, { useState } from 'react'
 import AppLayout from 'components/AppLayout'
-import {
-  Row,
-  Col,
-  Card,
-  Select,
-  Layout,
-  Form,
-  Button,
-  Typography,
-} from 'antd'
+import { Row, Col, Card, Layout, Form, Button, Typography } from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
 import CabineSeat from 'components/svg/CabineSeat'
 import RowA from 'components/svg/RowA'
@@ -23,44 +14,13 @@ import RowH from 'components/svg/RowH'
 import RowJ from 'components/svg/RowJ'
 import RowK from 'components/svg/RowK'
 import XIcon from 'components/svg/XIcon'
+import ReservedSeatsSelector from 'components/ReservedSeatsSelector'
 
 const { Title } = Typography
 
 let seatCoordiantes = {}
 
 const seatLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K']
-
-const ReservedSeatsSelect = () => {
-  const { Option } = Select
-  const children = []
-
-  for (let row = 1; row <= 30; row++) {
-    for (let letter of seatLetters) {
-      children.push(
-        <Option key={`${row}${letter}`}>{`${row}${letter}`}</Option>,
-      )
-    }
-  }
-
-  function handleChange(value) {
-    console.log(`selected ${value}`)
-  }
-
-  return (
-    <Select
-      mode="multiple"
-      style={{ width: '100%' }}
-      allowClear
-      placeholder="Select seats"
-      onChange={handleChange}
-      getPopupContainer={() =>
-        document.getElementById('Content-ReservedSeatsSelect')
-      }
-    >
-      {children}
-    </Select>
-  )
-}
 
 const getSeatCoordinates = (row, letter) => {
   const { x, y } = seatCoordiantes[`${row}${letter}`]
@@ -159,10 +119,10 @@ const Index = () => {
       <Row>
         <Col span={12}>
           <Content id="Content-ReservedSeatsSelect" style={{ height: '100%' }}>
-            <Card style={{ height: '100%' }} className='pl-5'>
+            <Card style={{ height: '100%' }} className="pl-5">
               <Form name="basic">
                 <Form.Item label="Reserved Seats" name="reserved_seats">
-                  <ReservedSeatsSelect />
+                  <ReservedSeatsSelector />
                 </Form.Item>
 
                 <Form.Item>
@@ -175,7 +135,7 @@ const Index = () => {
           </Content>
         </Col>
         <Col span={12}>
-          <Content className='flex justify-center'>
+          <Content className="flex justify-center">
             <AirplaneCabine>
               {renderSeatLetters()}
               {renderSeats()}

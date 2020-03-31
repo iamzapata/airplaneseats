@@ -5,7 +5,9 @@ module.exports = {
     config.resolve.alias['components'] = path.join(__dirname, 'components')
     config.resolve.alias['styles'] = path.join(__dirname, 'styles')
     config.resolve.alias['modules'] = path.join(__dirname, 'modules')
-    config.resolve.alias['utils'] = path.join(__dirname, 'utils')
+    ;(config.resolve.alias['utils'] = path.join(__dirname, 'utils')),
+      (config.resolve.alias['constants'] = path.join(__dirname, 'constants'))
+
     return config
   },
 }
