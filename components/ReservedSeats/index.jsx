@@ -6,8 +6,6 @@ const ReservedSeats = ({ getSeatCoordinates }) => {
   const state = useContext(AppState)
   const { reservedSeats } = state
 
-  console.warn({ reservedSeatsOld, reservedSeats })
-
   return reservedSeats.map(reservedSeat => {
     const [, row, seat] = reservedSeat.match(/(\d+)([A-Z])/)
     const { x, y } = getSeatCoordinates(row, seat)
