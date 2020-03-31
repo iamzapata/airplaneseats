@@ -26,7 +26,7 @@ const Index = () => {
       <Row>
         <Col span={24}>
           <Title level={2} className="p-3 text-center">
-            Don't Know
+            Family Seat Arrangement
           </Title>
         </Col>
       </Row>
@@ -41,7 +41,7 @@ const Index = () => {
 
                 <Form.Item>
                   <Button type="primary" htmlType="submit">
-                    Submit
+                    Arrange
                   </Button>
                 </Form.Item>
               </Form>
