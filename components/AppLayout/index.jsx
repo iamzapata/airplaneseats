@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'antd'
 import { format } from 'date-fns'
 
-const { Footer } = Layout
+const { Footer, Header } = Layout
 
 export default ({ children }) => {
   const currentYear = format(new Date(), 'yyyy')

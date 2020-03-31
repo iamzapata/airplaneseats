@@ -1,6 +1,15 @@
 import React, { useState } from 'react'
 import AppLayout from 'components/AppLayout'
-import { Row, Col, Content, Select, Layout } from 'antd'
+import {
+  Row,
+  Col,
+  Card,
+  Select,
+  Layout,
+  Form,
+  Button,
+  Typography,
+} from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
 import CabineSeat from 'components/svg/CabineSeat'
 import RowA from 'components/svg/RowA'
@@ -14,6 +23,8 @@ import RowH from 'components/svg/RowH'
 import RowJ from 'components/svg/RowJ'
 import RowK from 'components/svg/RowK'
 import XIcon from 'components/svg/XIcon'
+
+const { Title } = Typography
 
 let seatCoordiantes = {}
 
@@ -39,9 +50,12 @@ const ReservedSeatsSelect = () => {
     <Select
       mode="multiple"
       style={{ width: '100%' }}
-      placeholder="Please select"
+      allowClear
+      placeholder="Select seats"
       onChange={handleChange}
-      getPopupContainer={() => document.getElementById('Content-ReservedSeatsSelect')}
+      getPopupContainer={() =>
+        document.getElementById('Content-ReservedSeatsSelect')
+      }
     >
       {children}
     </Select>
@@ -136,17 +150,38 @@ const Index = () => {
   return (
     <AppLayout>
       <Row>
+        <Col span={24}>
+          <Title level={2} className="p-3 text-center">
+            Don't Know
+          </Title>
+        </Col>
+      </Row>
+      <Row>
         <Col span={12}>
-          <Content id='Content-ReservedSeatsSelect'>
-            <ReservedSeatsSelect />
+          <Content id="Content-ReservedSeatsSelect" style={{ height: '100%' }}>
+            <Card style={{ height: '100%' }} className='pl-5'>
+              <Form name="basic">
+                <Form.Item label="Reserved Seats" name="reserved_seats">
+                  <ReservedSeatsSelect />
+                </Form.Item>
+
+                <Form.Item>
+                  <Button type="primary" htmlType="submit">
+                    Submit
+                  </Button>
+                </Form.Item>
+              </Form>
+            </Card>
           </Content>
         </Col>
         <Col span={12}>
-          <AirplaneCabine>
-            {renderSeatLetters()}
-            {renderSeats()}
-            {renderMarkReservedSeats()}
-          </AirplaneCabine>
+          <Content className='flex justify-center'>
+            <AirplaneCabine>
+              {renderSeatLetters()}
+              {renderSeats()}
+              {renderMarkReservedSeats()}
+            </AirplaneCabine>
+          </Content>
         </Col>
       </Row>
     </AppLayout>
