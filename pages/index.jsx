@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Layout from 'components/Layout'
+import AppLayout from 'components/AppLayout'
+import { Row, Col, Content, Select, Layout } from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
 import CabineSeat from 'components/svg/CabineSeat'
 import RowA from 'components/svg/RowA'
@@ -18,12 +19,41 @@ let seatCoordiantes = {}
 
 const seatLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K']
 
+const ReservedSeatsSelect = () => {
+  const { Option } = Select
+  const children = []
+
+  for (let row = 1; row <= 30; row++) {
+    for (let letter of seatLetters) {
+      children.push(
+        <Option key={`${row}${letter}`}>{`${row}${letter}`}</Option>,
+      )
+    }
+  }
+
+  function handleChange(value) {
+    console.log(`selected ${value}`)
+  }
+
+  return (
+    <Select
+      mode="multiple"
+      style={{ width: '100%' }}
+      placeholder="Please select"
+      onChange={handleChange}
+      getPopupContainer={() => document.getElementById('Content-ReservedSeatsSelect')}
+    >
+      {children}
+    </Select>
+  )
+}
+
 const getSeatCoordinates = (row, letter) => {
-  const {x, y} = seatCoordiantes[`${row}${letter}`]
+  const { x, y } = seatCoordiantes[`${row}${letter}`]
 
   return {
     x: x + 4.5,
-    y: y + 2.5
+    y: y + 2.5,
   }
 }
 
@@ -46,7 +76,8 @@ const renderSeatLetters = () => {
   }
 
   Object.keys(rowComponents).forEach((seatLetter, index) => {
-    const Row = React.createElement(rowComponents[seatLetter], { x, y })
+    const key = `Row-${index}`
+    const Row = React.createElement(rowComponents[seatLetter], { x, y, key })
 
     seatLetters.push(Row)
 
@@ -70,9 +101,10 @@ const renderSeats = () => {
 
   rows.forEach(row => {
     cols.forEach(col => {
-      seatCoordiantes[`${row}${seatLetters[col]}`] = { x, y }
+      const seatLetter = seatLetters[col]
+      seatCoordiantes[`${row}${seatLetter}`] = { x, y }
 
-      seats.push(<CabineSeat x={x} y={y} />)
+      seats.push(<CabineSeat key={`Seat-${row}${seatLetter}`} x={x} y={y} />)
 
       if ([2, 6].includes(col)) {
         x += 20
@@ -95,20 +127,29 @@ const renderMarkReservedSeats = () => {
     const [, row, seat] = reservedSeat.match(/(\d+)([A-Z])/)
     const { x, y } = getSeatCoordinates(row, seat)
 
-    return <XIcon x={x} y={y} />
+    return <XIcon key={`Reserved-${row}${seat}`} x={x} y={y} />
   })
 }
 
 const Index = () => {
-  // const [coo]
+  const { Content } = Layout
   return (
-    <Layout>
-      <AirplaneCabine>
-        {renderSeatLetters()}
-        {renderSeats()}
-        {renderMarkReservedSeats()}
-      </AirplaneCabine>
-    </Layout>
+    <AppLayout>
+      <Row>
+        <Col span={12}>
+          <Content id='Content-ReservedSeatsSelect'>
+            <ReservedSeatsSelect />
+          </Content>
+        </Col>
+        <Col span={12}>
+          <AirplaneCabine>
+            {renderSeatLetters()}
+            {renderSeats()}
+            {renderMarkReservedSeats()}
+          </AirplaneCabine>
+        </Col>
+      </Row>
+    </AppLayout>
   )
 }
 
