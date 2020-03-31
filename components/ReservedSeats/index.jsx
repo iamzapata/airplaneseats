@@ -4,7 +4,6 @@ import XIcon from 'components/svg/XIcon'
 
 const ReservedSeats = ({ getSeatCoordinates }) => {
   const state = useContext(AppState)
-  const reservedSeatsOld = ['1A']
   const { reservedSeats } = state
 
   console.warn({ reservedSeatsOld, reservedSeats })
