@@ -22,7 +22,7 @@ function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
     if (groups.length === 1) return 1
   }
 
-  let rowsList = []
+  const rowsList = []
   for (let i = 1; i <= rows; i++) rowsList.push(i)
 
   let families = 0
@@ -36,12 +36,14 @@ function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
       if (row === parseInt(seatRow)) {
         availableOptions.forEach(option => {
           if (option.toString().includes(seatLetter)) {
-            availableOptionsStack = availableOptionsStack.filter(sup => !sup.toString().includes(seatLetter))
+            availableOptionsStack = availableOptionsStack.filter(
+              sup => !sup.toString().includes(seatLetter),
+            )
           }
         })
       }
     })
-    
+
     families += getFamilies(availableOptionsStack)
   })
 

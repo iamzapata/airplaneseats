@@ -11,9 +11,9 @@ module.exports = {
 
   moduleDirectories: ['node_modules', '<rootDir>'],
 
-  modulePaths: ["<rootDir>"],
+  modulePaths: ['<rootDir>'],
 
-  setupFilesAfterEnv: ['<rootDir>/__testing__/setupEnvironment.js'],  
+  setupFilesAfterEnv: ['<rootDir>/__testing__/setupEnvironment.js'],
 
   modulePathIgnorePatterns: ['<rootDir>/cypress'],
 

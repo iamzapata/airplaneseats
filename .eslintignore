@@ -1,0 +1,10 @@
+coverage/**
+node_modules/**
+webpack.*
+*/dev-tools/**
+*.gzip
+*.7z
+*.conf.js
+*.config.js
+*.dist.js
+postcss.config.js

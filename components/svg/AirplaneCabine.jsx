@@ -13,8 +13,8 @@ const AirplaneCabine = ({ children }) => (
       fill="#FCFDFF"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M30 116.046L41 79.6283L93.979 51.5337L146 79.6283L160 116.046L93.979 125.153L30 116.046Z"
       fill="#E5E5E5"
     />

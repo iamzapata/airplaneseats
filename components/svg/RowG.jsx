@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RowG = ({x, y}) => (
+const RowG = ({ x, y }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="9"
