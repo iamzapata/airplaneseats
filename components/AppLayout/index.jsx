@@ -6,17 +6,18 @@ const { Footer } = Layout
 
 const AppDispatch = React.createContext(null)
 
-const AppSatate = React.createContext(null)
+const AppState = React.createContext(null)
 
 const initialState = { seatCoords: {}, reservedSeats: [], families: {} }
 
 function reducer(state, action) {
-  console.warn({state, action })
+  console.warn({ state, action })
   const { type, payload } = action
   switch (type) {
     case 'UPDATE_SEAT_COORDS': {
       const { row, seat, x, y } = payload
       return {
+        ...state,
         seatCoords: {
           [`${row}${seat}`]: { x, y },
         },
@@ -24,7 +25,10 @@ function reducer(state, action) {
     }
     case 'UPDATE_RESERVED_SETS': {
       const { reservedSeats } = payload
-      return { reservedSeats: [...state.reservedSeats, reservedSeats] }
+      return {
+        ...state,
+        reservedSeats,
+      }
     }
     default:
       throw new Error()
@@ -37,16 +41,16 @@ export default ({ children }) => {
 
   return (
     <AppDispatch.Provider value={dispatch}>
-      <AppSatate.Provider value={state}>
+      <AppState.Provider value={state}>
         <Layout className="App_AppLayout">
           {children}
           <Footer style={{ textAlign: 'center' }}>
             Andres Zapata ©{currentYear}
           </Footer>
         </Layout>
-      </AppSatate.Provider>
+      </AppState.Provider>
     </AppDispatch.Provider>
   )
 }
 
-export { AppDispatch, AppSatate }
+export { AppDispatch, AppState }

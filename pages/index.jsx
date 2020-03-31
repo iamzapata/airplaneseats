@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import AppLayout from 'components/AppLayout'
 import { Row, Col, Card, Layout, Form, Button, Typography } from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
@@ -13,14 +13,13 @@ import RowG from 'components/svg/RowG'
 import RowH from 'components/svg/RowH'
 import RowJ from 'components/svg/RowJ'
 import RowK from 'components/svg/RowK'
-import XIcon from 'components/svg/XIcon'
 import ReservedSeatsSelector from 'components/ReservedSeatsSelector'
+import ReservedSeats from 'components/ReservedSeats'
+import { SEAT_LETTERS } from 'constants/seatLetters'
 
 const { Title } = Typography
 
 let seatCoordiantes = {}
-
-const seatLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K']
 
 const getSeatCoordinates = (row, letter) => {
   const { x, y } = seatCoordiantes[`${row}${letter}`]
@@ -75,7 +74,7 @@ const renderSeats = () => {
 
   rows.forEach(row => {
     cols.forEach(col => {
-      const seatLetter = seatLetters[col]
+      const seatLetter = SEAT_LETTERS[col]
       seatCoordiantes[`${row}${seatLetter}`] = { x, y }
 
       seats.push(<CabineSeat key={`Seat-${row}${seatLetter}`} x={x} y={y} />)
@@ -92,17 +91,6 @@ const renderSeats = () => {
   })
 
   return seats
-}
-
-const renderMarkReservedSeats = () => {
-  const reservedSeats = ['1A', '3H']
-
-  return reservedSeats.map(reservedSeat => {
-    const [, row, seat] = reservedSeat.match(/(\d+)([A-Z])/)
-    const { x, y } = getSeatCoordinates(row, seat)
-
-    return <XIcon key={`Reserved-${row}${seat}`} x={x} y={y} />
-  })
 }
 
 const Index = () => {
@@ -139,7 +127,7 @@ const Index = () => {
             <AirplaneCabine>
               {renderSeatLetters()}
               {renderSeats()}
-              {renderMarkReservedSeats()}
+              <ReservedSeats getSeatCoordinates={getSeatCoordinates}/>
             </AirplaneCabine>
           </Content>
         </Col>
