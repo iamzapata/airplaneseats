@@ -19,10 +19,14 @@ const getSeatCoordinates = (row, letter) => {
   }
 }
 
-const Index = () => {
+const Grid = ({ state }) => {
   const { Content } = Layout
+  const { reservedSeats } = state
+  const shouldDisableArrangeButton = reservedSeats.length === 0
+  console.warn({seatCoordiantes})
+
   return (
-    <AppLayout>
+    <>
       <Row>
         <Col span={24}>
           <Title level={2} className="p-3 text-center">
@@ -39,8 +43,13 @@ const Index = () => {
                   <ReservedSeatsSelector />
                 </Form.Item>
 
-                <Form.Item>
-                  <Button type="primary" htmlType="submit">
+                <Form.Item className="mt-64">
+                  <Button
+                    disabled={shouldDisableArrangeButton}
+                    type="primary"
+                    htmlType="submit"
+                    className="float-right"
+                  >
                     Arrange
                   </Button>
                 </Form.Item>
@@ -58,6 +67,14 @@ const Index = () => {
           </Content>
         </Col>
       </Row>
+    </>
+  )
+}
+
+const Index = () => {
+  return (
+    <AppLayout>
+      <Grid />
     </AppLayout>
   )
 }

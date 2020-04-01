@@ -8,27 +8,40 @@ function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
 
   const availableOptions = [['BCDE'], ['DEFG'], ['FGHJ']]
 
-  if (noSeatsReserved) return rows * 2
+  if (noSeatsReserved)
+    return [
+      {
+        fullyAvailable: true,
+        seatConfiguration: ['DEFG'],
+        count: rows * 2,
+      },
+    ]
 
-  const getFamilies = groups => {
-    const groupsString = groups.toString()
+  const getFamilies = (row, groups) => {
+    const seatConfiguration = groups.toString()
 
-    if (!groupsString) return 0
+    if (!seatConfiguration) return { row, seatConfiguration, count: 0 }
 
-    if (groupsString.includes('DEFG')) return 1
+    if (seatConfiguration.includes('DEFG'))
+      return { row, seatConfiguration: ['DEFG'], count: 1 }
 
-    if (groupsString.includes('BCDE') && groupsString.includes('FGHJ')) return 2
+    if (
+      seatConfiguration.includes('BCDE') &&
+      seatConfiguration.includes('FGHJ')
+    )
+      return { row, seatConfiguration: ['BCDE', 'FGHJ'], count: 2 }
 
-    if (groups.length === 1) return 1
+    if (groups.length === 1)
+      return { row, seatConfiguration: [seatConfiguration], count: 1, sup: 's' }
   }
 
   const rowsList = []
   for (let i = 1; i <= rows; i++) rowsList.push(i)
 
-  let families = 0
+  let families = []
 
   rowsList.forEach(row => {
-    let availableOptionsStack = [...availableOptions]
+    let remainingSeatOptions = [...availableOptions]
 
     reservedSeats.forEach(seat => {
       const [, seatRow, seatLetter] = seat.split(/(\d+)([a-zA-Z])/)
@@ -36,7 +49,7 @@ function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
       if (row === parseInt(seatRow)) {
         availableOptions.forEach(option => {
           if (option.toString().includes(seatLetter)) {
-            availableOptionsStack = availableOptionsStack.filter(
+            remainingSeatOptions = remainingSeatOptions.filter(
               sup => !sup.toString().includes(seatLetter),
             )
           }
@@ -44,7 +57,7 @@ function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
       }
     })
 
-    families += getFamilies(availableOptionsStack)
+    families.push(getFamilies(row, remainingSeatOptions))
   })
 
   return families

@@ -3,7 +3,7 @@ import CabineSeat from 'components/svg/CabineSeat'
 import { SEAT_LETTERS } from 'constants/seatLetters'
 
 const Seats = ({ seatCoordiantes }) => {
-  const rows = [...Array(30).keys()]
+  const rows = [...Array(30).keys()].map(i => i + 1)
   const cols = [...Array(10).keys()]
   let x = 10
   let y = 170
