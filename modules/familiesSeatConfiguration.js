@@ -43,7 +43,7 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
   const rowsList = []
   for (let i = 1; i <= rows; i++) rowsList.push(i)
 
-  let families = []
+  const families = []
 
   rowsList.forEach(row => {
     let remainingSeatOptions = [...availableOptionsSequence]

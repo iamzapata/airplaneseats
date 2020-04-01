@@ -72,7 +72,7 @@ describe('familiesSeatConfiguration', () => {
     const families = familiesSeatConfiguration(rows, reservedSeats)
 
     families.forEach(family => {
-      const seatConfiguration = family.seatConfiguration
+      const { seatConfiguration } = family
       const expectedSeats = expectedSeatConfiguration[family.row]
 
       expect(seatConfiguration).toEqual(expectedSeats)

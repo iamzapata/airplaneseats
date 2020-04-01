@@ -13,7 +13,7 @@ const FamilySeatOverlay = ({ x, y, fill = '#C4C4C4' }) => (
     <path
       d="M10 5C10 7.76142 7.76142 10 5 10C2.23858 10 0 7.76142 0 5C0 2.23858 2.23858 0 5 0C7.76142 0 10 2.23858 10 5Z"
       fill={fill}
-      fill-opacity="0.85"
+      fillOpacity="0.70"
     />
   </svg>
 )

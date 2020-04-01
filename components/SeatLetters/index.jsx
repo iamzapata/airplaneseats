@@ -35,7 +35,7 @@ const SeatLetters = () => {
     seatLetters.push(Row)
 
     if ([2, 6].includes(index)) {
-      x += 20
+      x += 28
     } else {
       x += 16.5
     }

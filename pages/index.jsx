@@ -11,7 +11,7 @@ import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
 
 const { Title } = Typography
 
-let seatCoordiantes = {}
+const seatCoordiantes = {}
 
 const getSeatCoordinates = (row, letter, { dx = 0, dy = 0 }) => {
   const { x, y } = seatCoordiantes[`${row}${letter}`]

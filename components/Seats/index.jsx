@@ -18,7 +18,7 @@ const Seats = ({ seatCoordiantes }) => {
       seats.push(<CabineSeat key={`Seat-${row}${seatLetter}`} x={x} y={y} />)
 
       if ([2, 6].includes(col)) {
-        x += 20
+        x += 30
       } else {
         x += 16
       }
