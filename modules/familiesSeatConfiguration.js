@@ -1,3 +1,12 @@
+/**
+ * This function returns a an array containing seat configurations 
+ * for famiiles of four members. Members are preferably seating in groups
+ * of 4, so the DEFG takes precedence. If DEFG is not available, than
+ * family members can be arranged in pairs, but must be separated by an isle.
+ * 
+ * @param {*} rows The rows that the airplane has
+ * @param {*} reservedSeatsList The list of seats that have been reserved
+ */
 function familiesSeatConfiguration(rows, reservedSeatsList) {
   if (!rows || typeof reservedSeatsList === undefined) {
     throw new TypeError('Missing arguments: One or more arguments are missing')
@@ -6,16 +15,18 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
   const reservedSeats = reservedSeatsList.split(/[\s-,|]/)
   const noSeatsReserved = !reservedSeatsList.length
 
-  const availableOptions = [['BCDE'], ['DEFG'], ['FGHJ']]
+  // ABC| |DEFG| |HJK
+  //  BC| |DEFG| |HJ
+  const availableOptionsSequence = [['BCDE'], ['DEFG'], ['FGHJ']]
 
+  // Full plain is avaible for configuration. This means 
+  // that all families are arranged in the DEFG configuration.
   if (noSeatsReserved)
-    return [
-      {
-        fullyAvailable: true,
-        seatConfiguration: ['DEFG'],
-        count: rows * 2,
-      },
-    ]
+    return [...Array(rows).keys()].map(row => ({
+      row,
+      seatConfiguration: ['DEFG'],
+      count: 1,
+    }))
 
   const getFamilies = (row, groups) => {
     const seatConfiguration = groups.toString()
@@ -41,14 +52,19 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
   let families = []
 
   rowsList.forEach(row => {
-    let remainingSeatOptions = [...availableOptions]
+    let remainingSeatOptions = [...availableOptionsSequence]
 
     reservedSeats.forEach(seat => {
       const [, seatRow, seatLetter] = seat.split(/(\d+)([a-zA-Z])/)
 
+      // Only check for conflicts in seats in the correspoinding row.
       if (row === parseInt(seatRow)) {
-        availableOptions.forEach(option => {
+        // 'BCDE', 'DEFG' or 'FGHJ'
+        availableOptionsSequence.forEach(option => {
+          // Conflict bewteen available options and current seat
           if (option.toString().includes(seatLetter)) {
+            // We need to remove any seat configuration that
+            // has conflicts with reserved seats.
             remainingSeatOptions = remainingSeatOptions.filter(
               sup => !sup.toString().includes(seatLetter),
             )

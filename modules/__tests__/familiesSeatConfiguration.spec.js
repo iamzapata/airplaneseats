@@ -17,7 +17,7 @@ describe('familiesSeatConfiguration', () => {
     const reservedSeats = ''
     const families = familiesSeatConfiguration(rows, reservedSeats)
 
-    expect(getTotalFamiliesCount(families)).toBe(2)
+    expect(getTotalFamiliesCount(families)).toBe(1)
   })
 
   it('returns 4 for 2 rows and no reserved seats', () => {
@@ -26,7 +26,7 @@ describe('familiesSeatConfiguration', () => {
 
     const families = familiesSeatConfiguration(rows, reservedSeats)
 
-    expect(getTotalFamiliesCount(families)).toBe(4)
+    expect(getTotalFamiliesCount(families)).toBe(2)
   })
 
   it('returns 20 for 10 rows and no reserved seats', () => {
@@ -35,7 +35,7 @@ describe('familiesSeatConfiguration', () => {
 
     const families = familiesSeatConfiguration(rows, reservedSeats)
 
-    expect(getTotalFamiliesCount(families)).toBe(20)
+    expect(getTotalFamiliesCount(families)).toBe(10)
   })
 
   it('returns 2 for 2 rows and 1A 2F 1C', () => {
