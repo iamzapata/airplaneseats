@@ -1,9 +1,9 @@
 /**
- * This function returns a an array containing seat configurations 
+ * This function returns a an array containing seat configurations
  * for famiiles of four members. Members are preferably seating in groups
  * of 4, so the DEFG takes precedence. If DEFG is not available, than
  * family members can be arranged in pairs, but must be separated by an isle.
- * 
+ *
  * @param {*} rows The rows that the airplane has
  * @param {*} reservedSeatsList The list of seats that have been reserved
  */
@@ -19,7 +19,7 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
   //  BC| |DEFG| |HJ
   const availableOptionsSequence = [['BCDE'], ['DEFG'], ['FGHJ']]
 
-  // Full plain is avaible for configuration. This means 
+  // Full plain is avaible for configuration. This means
   // that all families are arranged in the DEFG configuration.
   if (noSeatsReserved)
     return [...Array(rows).keys()].map(row => ({
@@ -31,16 +31,10 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
   const getFamilies = (row, groups) => {
     const seatConfiguration = groups.toString()
 
-    if (!seatConfiguration) return { row, seatConfiguration, count: 0 }
+    if (!seatConfiguration) return { row, seatConfiguration: [''], count: 0 }
 
     if (seatConfiguration.includes('DEFG'))
       return { row, seatConfiguration: ['DEFG'], count: 1 }
-
-    if (
-      seatConfiguration.includes('BCDE') &&
-      seatConfiguration.includes('FGHJ')
-    )
-      return { row, seatConfiguration: ['BCDE', 'FGHJ'], count: 2 }
 
     if (groups.length === 1)
       return { row, seatConfiguration: [seatConfiguration], count: 1, sup: 's' }
