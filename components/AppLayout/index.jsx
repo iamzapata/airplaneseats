@@ -22,7 +22,6 @@ function reducer(state, action) {
     }
     case 'UPDATE_FAMILIES_SEAT_CONFIG': {
       let { families } = payload
-      console.warn('UPDATE_FAMILIES_SEAT_CONFIG', families)
       return {
         ...state,
         families,
@@ -41,9 +40,7 @@ export default ({ children }) => {
     <AppDispatch.Provider value={dispatch}>
       <AppState.Provider value={state}>
         <Layout className="App_AppLayout">
-          {React.Children.map(children, child =>
-            React.cloneElement(child, { state, dispatch }),
-          )}
+          {children}
           <Footer style={{ textAlign: 'center' }}>
             Andres Zapata ©{currentYear}
           </Footer>

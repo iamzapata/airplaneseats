@@ -1,13 +1,12 @@
 import React from 'react'
 import AppLayout from 'components/AppLayout'
-import { Row, Col, Card, Layout, Form, Button, Typography } from 'antd'
+import { Row, Col, Card, Layout, Form, Typography } from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
 import SeatLetters from 'components/SeatLetters'
 import Seats from 'components/Seats'
 import ReservedSeatsSelector from 'components/ReservedSeatsSelector'
 import ReservedSeats from 'components/ReservedSeats'
 import FamilyGroups from 'components/FamilyGroups'
-import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
 
 const { Title } = Typography
 
@@ -22,17 +21,8 @@ const getSeatCoordinates = (row, letter, { dx = 0, dy = 0 }) => {
   }
 }
 
-const Grid = ({ state, dispatch }) => {
+const Grid = () => {
   const { Content } = Layout
-  const { reservedSeats } = state
-  const shouldDisableArrangeButton = reservedSeats.length === 0
-
-  const onClick = () => {
-    const { reservedSeats } = state
-    const families = familiesSeatConfiguration(30, reservedSeats.toString())
-
-    dispatch({ type: 'UPDATE_FAMILIES_SEAT_CONFIG', payload: { families } })
-  }
 
   return (
     <>
@@ -50,18 +40,6 @@ const Grid = ({ state, dispatch }) => {
               <Form name="basic">
                 <Form.Item label="Reserved Seats" name="reserved_seats">
                   <ReservedSeatsSelector />
-                </Form.Item>
-
-                <Form.Item className="mt-64">
-                  <Button
-                    disabled={shouldDisableArrangeButton}
-                    type="primary"
-                    htmlType="submit"
-                    className="float-right"
-                    onClick={onClick}
-                  >
-                    Arrange
-                  </Button>
                 </Form.Item>
               </Form>
             </Card>

@@ -10,7 +10,7 @@ const ReservedSeatsSelect = () => {
   const { Option } = Select
   const children = []
 
-  for (let row = 1; row <= 30; row++) {
+  for (let row = 1; row <= 30; row += 1) {
     for (const letter of SEAT_LETTERS) {
       children.push(
         <Option key={`${row}${letter}`}>{`${row}${letter}`}</Option>,

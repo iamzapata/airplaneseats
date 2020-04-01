@@ -8,7 +8,7 @@
  * @param {*} reservedSeatsList The list of seats that have been reserved
  */
 function familiesSeatConfiguration(rows, reservedSeatsList) {
-  if (!rows || typeof reservedSeatsList === undefined) {
+  if (!rows || typeof reservedSeatsList === 'undefined') {
     throw new TypeError('Missing arguments: One or more arguments are missing')
   }
 
@@ -38,10 +38,12 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
 
     if (groups.length === 1)
       return { row, seatConfiguration: [seatConfiguration], count: 1, sup: 's' }
+
+    return {}
   }
 
   const rowsList = []
-  for (let i = 1; i <= rows; i++) rowsList.push(i)
+  for (let i = 1; i <= rows; i += 1) rowsList.push(i)
 
   const families = []
 
@@ -52,7 +54,7 @@ function familiesSeatConfiguration(rows, reservedSeatsList) {
       const [, seatRow, seatLetter] = seat.split(/(\d+)([a-zA-Z])/)
 
       // Only check for conflicts in seats in the correspoinding row.
-      if (row === parseInt(seatRow)) {
+      if (row === parseInt(seatRow, 10)) {
         // 'BCDE', 'DEFG' or 'FGHJ'
         availableOptionsSequence.forEach(option => {
           // Conflict bewteen available options and current seat
