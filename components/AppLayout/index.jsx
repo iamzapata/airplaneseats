@@ -11,7 +11,6 @@ const AppState = React.createContext(null)
 const initialState = { seatCoords: {}, reservedSeats: [], families: [] }
 
 function reducer(state, action) {
-  console.warn({ state, action })
   const { type, payload } = action
   switch (type) {
     case 'UPDATE_RESERVED_SEATS': {
@@ -22,7 +21,8 @@ function reducer(state, action) {
       }
     }
     case 'UPDATE_FAMILIES_SEAT_CONFIG': {
-      const { families } = payload
+      let { families } = payload
+      console.warn('UPDATE_FAMILIES_SEAT_CONFIG', families)
       return {
         ...state,
         families,

@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Select } from 'antd'
 import { SEAT_LETTERS } from 'constants/seatLetters'
 import { AppDispatch } from 'components/AppLayout'
+import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
 
 const ReservedSeatsSelect = () => {
   const dispatch = useContext(AppDispatch)
@@ -18,7 +19,12 @@ const ReservedSeatsSelect = () => {
   }
 
   function handleChange(reservedSeats) {
+    const families = reservedSeats.length
+      ? familiesSeatConfiguration(30, reservedSeats.toString())
+      : []
+
     dispatch({ type: 'UPDATE_RESERVED_SEATS', payload: { reservedSeats } })
+    dispatch({ type: 'UPDATE_FAMILIES_SEAT_CONFIG', payload: { families } })
   }
 
   return (
