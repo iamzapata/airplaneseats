@@ -35,8 +35,7 @@ const ReservedSeatsSelect = () => {
       placeholder="Select seats"
       onChange={handleChange}
       getPopupContainer={() =>
-        document.getElementById('Content-ReservedSeatsSelect')
-      }
+        document.getElementById('Content-ReservedSeatsSelect')}
     >
       {children}
     </Select>

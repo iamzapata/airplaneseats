@@ -2,7 +2,7 @@ import React from 'react'
 import CabineSeat from 'components/svg/CabineSeat'
 import { SEAT_LETTERS } from 'constants/seatLetters'
 
-const Seats = ({ seatCoordiantes }) => {
+const Seats = ({ setSeatCoordiantes }) => {
   const rows = [...Array(30).keys()].map(i => i + 1)
   const cols = [...Array(10).keys()]
   let x = 10
@@ -13,7 +13,8 @@ const Seats = ({ seatCoordiantes }) => {
   rows.forEach(row => {
     cols.forEach(col => {
       const seatLetter = SEAT_LETTERS[col]
-      seatCoordiantes[`${row}${seatLetter}`] = { x, y }
+
+      setSeatCoordiantes(row, seatLetter, x, y)
 
       seats.push(<CabineSeat key={`Seat-${row}${seatLetter}`} x={x} y={y} />)
 

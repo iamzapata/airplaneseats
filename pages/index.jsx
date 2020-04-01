@@ -21,6 +21,10 @@ const getSeatCoordinates = (row, letter, { dx = 0, dy = 0 }) => {
   }
 }
 
+const setSeatCoordiantes = (row, seatLetter, x, y) => {
+  seatCoordiantes[`${row}${seatLetter}`] = { x, y }
+}
+
 const Grid = () => {
   const { Content } = Layout
 
@@ -49,7 +53,7 @@ const Grid = () => {
           <Content className="flex justify-center">
             <AirplaneCabine>
               <SeatLetters />
-              <Seats seatCoordiantes={seatCoordiantes} />
+              <Seats setSeatCoordiantes={setSeatCoordiantes} />
               <ReservedSeats getSeatCoordinates={getSeatCoordinates} />
               <FamilyGroups seatCoordiantes={seatCoordiantes} />
             </AirplaneCabine>
