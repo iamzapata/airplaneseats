@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import AppLayout from 'components/AppLayout'
 import { Row, Col, Card, Layout, Form, Button, Typography } from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
@@ -6,6 +6,8 @@ import SeatLetters from 'components/SeatLetters'
 import Seats from 'components/Seats'
 import ReservedSeatsSelector from 'components/ReservedSeatsSelector'
 import ReservedSeats from 'components/ReservedSeats'
+import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
+
 const { Title } = Typography
 
 let seatCoordiantes = {}
@@ -19,11 +21,18 @@ const getSeatCoordinates = (row, letter) => {
   }
 }
 
-const Grid = ({ state }) => {
+const Grid = ({ state, dispatch }) => {
+  console.warn('GRID:', { state })
   const { Content } = Layout
   const { reservedSeats } = state
   const shouldDisableArrangeButton = reservedSeats.length === 0
-  console.warn({seatCoordiantes})
+
+  const onClick = () => {
+    const { reservedSeats } = state
+    const families = familiesSeatConfiguration(30, reservedSeats.toString())
+
+    dispatch({ type: 'UPDATE_FAMILIES_SEAT_CONFIG', payload: { families } })
+  }
 
   return (
     <>
@@ -49,6 +58,7 @@ const Grid = ({ state }) => {
                     type="primary"
                     htmlType="submit"
                     className="float-right"
+                    onClick={onClick}
                   >
                     Arrange
                   </Button>

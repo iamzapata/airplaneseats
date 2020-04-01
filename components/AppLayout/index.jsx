@@ -8,7 +8,7 @@ const AppDispatch = React.createContext(null)
 
 const AppState = React.createContext(null)
 
-const initialState = { seatCoords: {}, reservedSeats: [], families: {} }
+const initialState = { seatCoords: {}, reservedSeats: [], families: [] }
 
 function reducer(state, action) {
   console.warn({ state, action })
@@ -23,11 +23,18 @@ function reducer(state, action) {
         },
       }
     }
-    case 'UPDATE_RESERVED_SETS': {
+    case 'UPDATE_RESERVED_SEATS': {
       const { reservedSeats } = payload
       return {
         ...state,
         reservedSeats,
+      }
+    }
+    case 'UPDATE_FAMILIES_SEAT_CONFIG': {
+      const { families } = payload
+      return {
+        ...state,
+        families,
       }
     }
     default:
@@ -44,7 +51,7 @@ export default ({ children }) => {
       <AppState.Provider value={state}>
         <Layout className="App_AppLayout">
           {React.Children.map(children, child =>
-            React.cloneElement(child, { state }),
+            React.cloneElement(child, { state, dispatch }),
           )}
           <Footer style={{ textAlign: 'center' }}>
             Andres Zapata ©{currentYear}

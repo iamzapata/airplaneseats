@@ -18,8 +18,7 @@ const ReservedSeatsSelect = () => {
   }
 
   function handleChange(reservedSeats) {
-    dispatch({ type: 'UPDATE_RESERVED_SETS', payload: { reservedSeats } })
-    console.log(`selected ${reservedSeats}`)
+    dispatch({ type: 'UPDATE_RESERVED_SEATS', payload: { reservedSeats } })
   }
 
   return (
