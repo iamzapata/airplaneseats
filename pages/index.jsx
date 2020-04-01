@@ -6,23 +6,23 @@ import SeatLetters from 'components/SeatLetters'
 import Seats from 'components/Seats'
 import ReservedSeatsSelector from 'components/ReservedSeatsSelector'
 import ReservedSeats from 'components/ReservedSeats'
+import FamilyGroups from 'components/FamilyGroups'
 import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
 
 const { Title } = Typography
 
 let seatCoordiantes = {}
 
-const getSeatCoordinates = (row, letter) => {
+const getSeatCoordinates = (row, letter, { dx = 0, dy = 0 }) => {
   const { x, y } = seatCoordiantes[`${row}${letter}`]
 
   return {
-    x: x + 4.5,
-    y: y + 2.5,
+    x: x + dx,
+    y: y + dy,
   }
 }
 
 const Grid = ({ state, dispatch }) => {
-  console.warn('GRID:', { state })
   const { Content } = Layout
   const { reservedSeats } = state
   const shouldDisableArrangeButton = reservedSeats.length === 0
@@ -73,6 +73,7 @@ const Grid = ({ state, dispatch }) => {
               <SeatLetters />
               <Seats seatCoordiantes={seatCoordiantes} />
               <ReservedSeats getSeatCoordinates={getSeatCoordinates} />
+              <FamilyGroups seatCoordiantes={seatCoordiantes} />
             </AirplaneCabine>
           </Content>
         </Col>

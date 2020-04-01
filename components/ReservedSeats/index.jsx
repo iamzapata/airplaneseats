@@ -8,7 +8,7 @@ const ReservedSeats = ({ getSeatCoordinates }) => {
 
   return reservedSeats.map(reservedSeat => {
     const [, row, seat] = reservedSeat.match(/(\d+)([A-Z])/)
-    const { x, y } = getSeatCoordinates(row, seat)
+    const { x, y } = getSeatCoordinates(row, seat, { dx: 4.5, dy: 2.5 })
 
     return <XIcon key={`Reserved-${row}${seat}`} x={x} y={y} />
   })

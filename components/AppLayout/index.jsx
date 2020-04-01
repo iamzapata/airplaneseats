@@ -14,15 +14,6 @@ function reducer(state, action) {
   console.warn({ state, action })
   const { type, payload } = action
   switch (type) {
-    case 'UPDATE_SEAT_COORDS': {
-      const { row, seat, x, y } = payload
-      return {
-        ...state,
-        seatCoords: {
-          [`${row}${seat}`]: { x, y },
-        },
-      }
-    }
     case 'UPDATE_RESERVED_SEATS': {
       const { reservedSeats } = payload
       return {
