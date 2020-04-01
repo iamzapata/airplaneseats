@@ -1,4 +1,4 @@
-function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
+function familiesSeatConfiguration(rows, reservedSeatsList) {
   if (!rows || typeof reservedSeatsList === undefined) {
     throw new TypeError('Missing arguments: One or more arguments are missing')
   }
@@ -63,4 +63,4 @@ function numberOfFamiliesOnPlane(rows, reservedSeatsList) {
   return families
 }
 
-export default numberOfFamiliesOnPlane
+export default familiesSeatConfiguration
