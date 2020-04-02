@@ -20,7 +20,9 @@ const Seats = ({ setSeatCoordiantes }) => {
 
     dispatch({
       type: 'UPDATE_RESERVED_SEATS',
-      payload: { reservedSeats: [...reservedSeats, reservedSeat] },
+      payload: {
+        reservedSeats: [...new Set([...reservedSeats, reservedSeat])],
+      },
     })
   }
 

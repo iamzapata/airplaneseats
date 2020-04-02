@@ -40,7 +40,9 @@ export default ({ children }) => {
     <AppDispatch.Provider value={dispatch}>
       <AppState.Provider value={state}>
         <Layout className="App_AppLayout">
-          {children}
+          {React.Children.map(children, child =>
+            React.cloneElement(child, { state, dispatch }),
+          )}
           <Footer style={{ textAlign: 'center' }}>
             Andres Zapata ©{currentYear}
           </Footer>
