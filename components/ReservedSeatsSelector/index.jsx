@@ -1,11 +1,13 @@
 import React, { useContext } from 'react'
 import { Select } from 'antd'
 import { SEAT_LETTERS } from 'constants/seatLetters'
-import { AppDispatch } from 'components/AppLayout'
+import { AppDispatch, AppState } from 'components/AppLayout'
 import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
 
 const ReservedSeatsSelect = () => {
   const dispatch = useContext(AppDispatch)
+  const state = useContext(AppState)
+  const { reservedSeats } = state
 
   const { Option } = Select
   const children = []
@@ -34,8 +36,10 @@ const ReservedSeatsSelect = () => {
       allowClear
       placeholder="Select seats"
       onChange={handleChange}
+      value={reservedSeats}
       getPopupContainer={() =>
-        document.getElementById('Content-ReservedSeatsSelect')}
+        document.getElementById('Content-ReservedSeatsSelect')
+      }
     >
       {children}
     </Select>

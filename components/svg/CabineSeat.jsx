@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CabineSeat = ({ x, y }) => (
+const CabineSeat = ({ x, y, onClick, row, seat }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="14"
@@ -9,6 +9,7 @@ const CabineSeat = ({ x, y }) => (
     fill="none"
     x={x}
     y={y}
+    onClick={() => onClick(row, seat)}
   >
     <path
       d="M1.78235 3.62753C1.78235 2.17678 2.96053 1 4.41923 1H9.47169C10.9304 1 12.1117 2.17367 12.1117 3.62753V10.0936C12.1117 11.5413 10.9304 12.7274 9.47169 12.7274H4.41923C2.96053 12.7274 1.78235 11.5413 1.78235 10.0936V3.62753Z"
