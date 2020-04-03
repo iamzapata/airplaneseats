@@ -1,12 +1,13 @@
 import React from 'react'
 import AppLayout from 'components/AppLayout'
-import { Row, Col, Card, Layout, Form, Typography } from 'antd'
+import { Row, Col, Card, Layout, Form, Button, Typography } from 'antd'
 import AirplaneCabine from 'components/svg/AirplaneCabine'
 import SeatLetters from 'components/SeatLetters'
 import Seats from 'components/Seats'
 import ReservedSeatsSelector from 'components/ReservedSeatsSelector'
 import ReservedSeats from 'components/ReservedSeats'
 import FamilyGroups from 'components/FamilyGroups'
+import familiesSeatConfiguration from 'modules/familiesSeatConfiguration'
 
 const { Title } = Typography
 
@@ -25,8 +26,17 @@ const setSeatCoordiantes = (row, seatLetter, x, y) => {
   seatCoordiantes[`${row}${seatLetter}`] = { x, y }
 }
 
-const Grid = () => {
+const Grid = ({ state, dispatch }) => {
   const { Content } = Layout
+  const { reservedSeats } = state
+  const shouldDisableArrangeButton = reservedSeats.length === 0
+
+  const onClick = () => {
+    const { reservedSeats } = state
+    const families = familiesSeatConfiguration(30, reservedSeats.toString())
+
+    dispatch({ type: 'UPDATE_FAMILIES_SEAT_CONFIG', payload: { families } })
+  }
 
   return (
     <>
@@ -41,9 +51,24 @@ const Grid = () => {
         <Col span={12}>
           <Content id="Content-ReservedSeatsSelect" style={{ height: '100%' }}>
             <Card style={{ height: '100%' }} className="ml-5">
-              <Form name="basic">
-                <Form.Item label="Reserved Seats" name="reserved_seats">
+              <Form name="basic" className="flex justify-between">
+                <Form.Item
+                  className="w-full pr-2"
+                  label="Reserved Seats"
+                  name="reserved_seats"
+                >
                   <ReservedSeatsSelector />
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    disabled={shouldDisableArrangeButton}
+                    type="primary"
+                    htmlType="submit"
+                    className="float-right"
+                    onClick={onClick}
+                  >
+                    Arrange
+                  </Button>
                 </Form.Item>
               </Form>
             </Card>
